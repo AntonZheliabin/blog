@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Публикации{% endblock %}
+
+{% block content %}
+    <h3>Публикации</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <td>Дата</td><th>Название</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pub in publications %}
+            <tr>
+                <td>{{ pub.date|date:"H:i d/m/Y" }}</td>
+                <td><a href="/publications/{{ pub.id }}">{{ pub.title }}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h5>Оставить комментарий</h5>
+    <p>{{ error  }}</p>
+    <form method="post" action="/publications">
+        {% csrf_token %}
+        <input type="text" name="comment_name" placeholder="Введите ваше имя">
+        <textarea name="comment_text" placeholder="Введите текст"></textarea>
+        <button>Опубликовать</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Имя</th><th>Комментрий</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for comment in comments %}
+            <tr>
+                <td>{{ comment.comment_name }}</td>
+                <td>{{ comment.comment_text }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

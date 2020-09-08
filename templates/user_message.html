@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Сообщения пользователей{% endblock %}
+
+{% block content %}
+    <h3>Сообщения пользователей</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <td>Имя</td><th>Номер телефона</th><th>Сообщение</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for message in messages %}
+            <tr>
+                <td>{{ message.user_name }}</td>
+                <td>{{ message.user_phone }}</td>
+                <td>{{ message.user_text }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
